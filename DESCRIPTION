@@ -13,10 +13,7 @@ Maintainer: Artur Araujo <artur.stat@gmail.com>
 Description: Generation of survival data with one (binary)
         time-dependent covariate.  Generation of survival data arising
         from a progressive illness-death model.
-License: GPL (>= 2)
+License: GPL-3
 LazyLoad: yes
 LazyData: yes
 NeedsCompilation: yes
-Packaged: 2015-11-09 14:17:09 UTC; aaraujo
-Repository: CRAN
-Date/Publication: 2015-11-09 15:27:19
