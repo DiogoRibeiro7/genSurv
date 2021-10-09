@@ -24,7 +24,7 @@ Authors@R: c(
 		family = "Faria",
 		role = "aut",
 		email = "sfaria@math.uminho.pt",
-		comment = c(ORCID = "")
+		comment = c(ORCID = "0000-0001-8014-9902")
 	) )
 Depends: R (>= 3.1.0)
 Suggests: survival
