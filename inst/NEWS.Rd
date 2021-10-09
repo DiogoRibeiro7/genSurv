@@ -2,6 +2,12 @@
 
 \title{NEWS file for the genSurv package}
 
+\section{Changes in version 1.0.4}{
+  \itemize{
+    \item{Fixed minor issues.}
+  }
+}
+
 \section{Changes in version 1.0.3}{
   \itemize{
     \item{Corrected NAMESPACE file.}
