@@ -15,7 +15,6 @@
 		Date: \tab 2021-10-09\cr
 		License: \tab GPL-3\cr
 		LazyLoad: \tab yes\cr
-		LazyData: \tab yes\cr
 	}
 }
 
