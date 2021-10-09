@@ -15,5 +15,4 @@ Description: Generation of survival data with one (binary)
         from a progressive illness-death model.
 License: GPL-3
 LazyLoad: yes
-LazyData: yes
 NeedsCompilation: yes
