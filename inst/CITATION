@@ -41,6 +41,6 @@ citEntry(
   pages       = "929--946",
   doi         = "10.1080/03610918.2012.718841",
   textVersion = "Luís Meira-Machado and Susana Faria (2014).
-  “A simulation study comparing modeling approaches in an illness-death multi-state model”,
+  “A simulation study comparing modeling approaches in an illness-death multi-state model”.
   Communications in Statistics - Simulation and Computation, 43(5), 929-946. doi:10.1080/03610918.2012.718841"
 );
