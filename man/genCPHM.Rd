@@ -19,7 +19,7 @@
 \value{An object with two classes, \code{data.frame} and \code{CPHM}.}
 
 \references{
-Cox, D.R. (1972). Regression models and life tables (with discussion). Journal of the Royal Statistical Society, Series B 34:187-220.
+Cox, D.R. (1972). Regression models and life tables (with discussion). \emph{Journal of the Royal Statistical Society: Series B}, \bold{34}(2), 187-202. \doi{10.1111/j.2517-6161.1972.tb00899.x}
 }
 
 \author{Artur Araújo, Luís Meira Machado and Susana Faria}
