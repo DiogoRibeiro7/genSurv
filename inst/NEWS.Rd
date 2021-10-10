@@ -4,7 +4,9 @@
 
 \section{Changes in version 1.0.4}{
   \itemize{
-    \item{Fixed minor issues.}
+    \item{Modified license from GPL (>=2) to GPL-3.}
+    \item{Removed unnecessary LazyData entries.}
+    \item{Registered native routines and disabled symbol search.}
     \item{Improved the documentation.}
   }
 }
