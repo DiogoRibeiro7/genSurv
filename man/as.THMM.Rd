@@ -17,7 +17,7 @@ is.THMM(x)}
 \value{An object with two classes one being \code{data.frame} and the other \code{THMM}.}
 
 \references{
-Cox, D.R. (1972). Regression models and life tables (with discussion). \emph{Journal of the Royal Statistical Society: Series B}, \bold{34}(2), 187-202. \doi{10.1111/j.2517-6161.1972.tb00899.x}
+Cox, D.R. (1972). Regression models and life tables. \emph{Journal of the Royal Statistical Society: Series B}, \bold{34}(2), 187-202. \doi{10.1111/j.2517-6161.1972.tb00899.x}
 
 Jackson, C. (2011). Multi-State Models for Panel Data: The msm Package for R. \emph{Journal of Statistical Software}, \bold{38}(8), 1–28. \doi{10.18637/jss.v038.i08}
 
