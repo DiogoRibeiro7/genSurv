@@ -1,6 +1,4 @@
 
-#include <R_ext/Error.h>
-#include <R_ext/Rdynload.h>
 #include <R_ext/Visibility.h>
 #include <Rinternals.h>
 #include <Rversion.h>
