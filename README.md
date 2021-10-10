@@ -15,7 +15,7 @@ This research was financed by **FEDER** Funds through *Programa Operacional Fact
 ## References
 Anderson, P.K., Gill, R.D. (1982). Cox's regression model for counting processes: a large sample study. *Annals of Statistics*, **10**(4), 1100-1120. [doi:10.1214/aos/1176345976](https://doi.org/10.1214/aos/1176345976)
 
-Cox, D.R. (1972). Regression models and life tables (with discussion). *Journal of the Royal Statistical Society: Series B* **34**(2), 187-202. [doi:10.1111/j.2517-6161.1972.tb00899.x](https://doi.org/10.1111/j.2517-6161.1972.tb00899.x)
+Cox, D.R. (1972). Regression models and life tables. *Journal of the Royal Statistical Society: Series B* **34**(2), 187-202. [doi:10.1111/j.2517-6161.1972.tb00899.x](https://doi.org/10.1111/j.2517-6161.1972.tb00899.x)
 
 Jackson, C. (2011). Multi-State Models for Panel Data: The msm Package for R. *Journal of Statistical Software*, **38**(8), 1–28. [doi:10.18637/jss.v038.i08](https://doi.org/10.18637/jss.v038.i08)
 
