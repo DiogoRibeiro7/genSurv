@@ -56,15 +56,15 @@ Anderson, P.K., Gill, R.D. (1982). Cox's regression model for counting processes
 
 Cox, D.R. (1972). Regression models and life tables. \emph{Journal of the Royal Statistical Society: Series B}, \bold{34}(2), 187-202. \doi{10.1111/j.2517-6161.1972.tb00899.x}
 
-Johnson, M. E. (1987). \emph{Multivariate Statistical Simulation}. John Wiley and Sons.
+Johnson, M. E. (1987). \emph{Multivariate Statistical Simulation}, John Wiley and Sons.
 
-Johnson, N., Kotz, S. (1972). \emph{Distribution in statistics: continuous multivariate distributions}. John Wiley and Sons.
+Johnson, N., Kotz, S. (1972). \emph{Distribution in statistics: continuous multivariate distributions}, John Wiley and Sons.
 
-Lu J., Bhattacharya G. (1990). Some new constructions of bivariate weibull models. \emph{Annals of Institute of Statistical Mathematics} \bold{42}(3), 543-559. \doi{10.1007/BF00049307}
+Lu J., Bhattacharya G. (1990). Some new constructions of bivariate weibull models. \emph{Annals of Institute of Statistical Mathematics}, \bold{42}(3), 543-559. \doi{10.1007/BF00049307}
 
-Meira-Machado, L., Cadarso-Suárez, C., De Uña- Álvarez, J., Andersen, P.K. (2009). Multi-state models for the analysis of time to event data. \emph{Statistical Methods in Medical Research} \bold{18}(2), 195-222. \doi{10.1177/0962280208092301}
+Meira-Machado, L., Cadarso-Suárez, C., De Uña- Álvarez, J., Andersen, P.K. (2009). Multi-state models for the analysis of time to event data. \emph{Statistical Methods in Medical Research}, \bold{18}(2), 195-222. \doi{10.1177/0962280208092301}
 
-Therneau, T.M., Grambsch, P.M. (2000). \emph{Modelling survival data: Extending the Cox Model}. New York: Springer.
+Therneau, T.M., Grambsch, P.M. (2000). \emph{Modelling survival data: Extending the Cox Model}, New York: Springer.
 }
 
 \author{Artur Araújo, Luís Meira Machado and Susana Faria}

@@ -31,17 +31,17 @@ Cox, D.R. (1972). Regression models and life tables. \emph{Journal of the Royal 
 
 Jackson, C. (2011). Multi-State Models for Panel Data: The msm Package for R. \emph{Journal of Statistical Software}, \bold{38}(8), 1–28. \doi{10.18637/jss.v038.i08}
 
-Johnson, M. E. (1987). \emph{Multivariate Statistical Simulation}. John Wiley and Sons.
+Johnson, M. E. (1987). \emph{Multivariate Statistical Simulation}, John Wiley and Sons.
 
-Johnson, N., Kotz, S. (1972). \emph{Distribution in statistics: continuous multivariate distributions}. John Wiley and Sons.
+Johnson, N., Kotz, S. (1972). \emph{Distribution in statistics: continuous multivariate distributions}, John Wiley and Sons.
 
-Lu J., Bhattacharya G. (1990). Some new constructions of bivariate weibull models. \emph{Annals of Institute of Statistical Mathematics} \bold{42}(3), 543-559. \doi{10.1007/BF00049307}
+Lu J., Bhattacharya G. (1990). Some new constructions of bivariate weibull models. \emph{Annals of Institute of Statistical Mathematics}, \bold{42}(3), 543-559. \doi{10.1007/BF00049307}
 
-Meira-Machado, L., Cadarso-Suárez, C., De Uña- Álvarez, J., Andersen, P.K. (2009). Multi-state models for the analysis of time to event data. \emph{Statistical Methods in Medical Research} \bold{18}(2), 195-222. \doi{10.1177/0962280208092301}
+Meira-Machado, L., Cadarso-Suárez, C., De Uña- Álvarez, J., Andersen, P.K. (2009). Multi-state models for the analysis of time to event data. \emph{Statistical Methods in Medical Research}, \bold{18}(2), 195-222. \doi{10.1177/0962280208092301}
 
 Meira-Machado, L., Roca-Pardiñas, J. (2011). p3state.msm: Analyzing Survival Data from an Illness-Death Model. \emph{Journal of Statistical Software}, \bold{38}(3), 1-18. \doi{10.18637/jss.v038.i03}
 
-Therneau, T.M., Grambsch, P.M. (2000). \emph{Modelling survival data: Extending the Cox Model}. New York: Springer.
+Therneau, T.M., Grambsch, P.M. (2000). \emph{Modelling survival data: Extending the Cox Model}, New York: Springer.
 }
 
 \keyword{package}
