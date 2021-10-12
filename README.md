@@ -27,6 +27,8 @@ Lu J., Bhattacharya G. (1990). Some new constructions of bivariate weibull model
 
 Meira-Machado, L., Cadarso-Suárez, C., De Uña- Álvarez, J., Andersen, P.K. (2009). Multi-state models for the analysis of time to event data. *Statistical Methods in Medical Research*, **18**(2), 195-222. [doi:10.1177/0962280208092301](https://doi.org/10.1177/0962280208092301)
 
+Meira-Machado L., Faria S. (2014). A simulation study comparing modeling approaches in an illness-death multi-state model. *Communications in Statistics - Simulation and Computation*, **43**(5), 929-946. [doi:10.1080/03610918.2012.718841](https://doi.org/10.1080/03610918.2012.718841)
+
 Meira-Machado, L., Roca-Pardiñas, J. (2011). p3state.msm: Analyzing Survival Data from an Illness-Death Model. *Journal of Statistical Software*, **38**(3), 1-18. [doi:10.18637/jss.v038.i03](https://doi.org/10.18637/jss.v038.i03)
 
 Therneau, T.M., Grambsch, P.M. (2000). *Modelling survival data: Extending the Cox Model*, New York: Springer.
