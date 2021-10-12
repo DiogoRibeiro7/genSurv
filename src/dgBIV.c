@@ -28,7 +28,7 @@ static void weibullt(
 	doubleCP t1,
 	doubleCP t2)
 {
-	register short i;
+	register int i;
 	double u[5], v;
 	for (i = 0; i < 5; i++) u[i] = runif(0, 1);
 	if (u[4] > *pcorr) v = -log(u[3]);
