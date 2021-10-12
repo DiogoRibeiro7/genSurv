@@ -28,7 +28,7 @@ static void weibullt(
 	doubleCP t1,
 	doubleCP t2)
 {
-	register int i;
+	register short i;
 	double u[5], v;
 	for (i = 0; i < 5; i++) u[i] = runif(0, 1);
 	if (u[4] > *pcorr) v = -log(u[3]);
@@ -50,7 +50,7 @@ SEXP dgBIV(
 	else if (strcmp(pdist, "exponential") == 0) tfunc = expt;
 	SEXP mat;
 	PROTECT( mat = allocMatrix(REALSXP, *INTEGER(n), 2) );
-	register int i;
+	register R_len_t i;
 	GetRNGstate();
 	for (i = 0; i < *INTEGER(n); i++) {
 		tfunc(REAL(corr), REAL(distpar), &REAL(mat)[i], &REAL(mat)[i+*INTEGER(n)]);
