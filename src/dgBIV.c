@@ -50,7 +50,7 @@ SEXP dgBIV(
 	else if (strcmp(pdist, "exponential") == 0) tfunc = expt;
 	SEXP mat;
 	PROTECT( mat = allocMatrix(REALSXP, *INTEGER(n), 2) );
-	register R_len_t i;
+	register int i;
 	GetRNGstate();
 	for (i = 0; i < *INTEGER(n); i++) {
 		tfunc(REAL(corr), REAL(distpar), &REAL(mat)[i], &REAL(mat)[i+*INTEGER(n)]);
