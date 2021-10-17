@@ -4,6 +4,20 @@ Generating Multi-State Survival Data.
 ## Description
 The **genSurv** software permits to generate data with one binary time-dependent covariate and data stemming from a progressive illness-death model.
 
+## Installation
+If you want to use the release version of the **genSurv** package, you can install the package from CRAN as follows:
+```r
+install.packages(pkgs="genSurv");
+```
+If you want to use the development version of the **genSurv** package, you can install the package from GitHub via the [**remotes** package](https://remotes.r-lib.org):
+```r
+remotes::install_github(
+  repo="arturstat/genSurv",
+  build=TRUE,
+  build_manual=TRUE
+);
+```
+
 ## Authors
 Artur Araújo, Luís Meira-Machado <lmachado@math.uminho.pt> \
 and Susana Faria <sfaria@math.uminho.pt> \
