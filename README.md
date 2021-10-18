@@ -45,4 +45,7 @@ Meira-Machado L., Faria S. (2014). A simulation study comparing modeling approac
 
 Meira-Machado, L., Roca-Pardiñas, J. (2011). p3state.msm: Analyzing Survival Data from an Illness-Death Model. *Journal of Statistical Software*, **38**(3), 1-18. [doi:10.18637/jss.v038.i03](https://doi.org/10.18637/jss.v038.i03)
 
+Meira-Machado, L., Sestelo M. (2019). Estimation in the progressive illness-death model: a nonexhaustive
+review. *Biometrical Journal*, **61**(2), 245–263. [doi:10.1002/bimj.201700200](https://doi.org/10.1002/bimj.201700200)
+
 Therneau, T.M., Grambsch, P.M. (2000). *Modelling survival data: Extending the Cox Model*, New York: Springer.
