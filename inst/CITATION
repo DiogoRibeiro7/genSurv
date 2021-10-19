@@ -7,7 +7,7 @@ citHeader(
 title <- "Generating multi-state survival data";
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl=TRUE);
 vers <- paste("R package version", meta$Version);
-url <- paste("http://CRAN.R-project.org/package=", PKG, sep="");
+url <- paste("https://CRAN.R-project.org/package=", PKG, sep="");
 
 citEntry(
 	entry       = "Manual",
