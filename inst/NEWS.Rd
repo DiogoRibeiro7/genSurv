@@ -2,6 +2,12 @@
 
 \title{NEWS file for the genSurv package}
 
+\section{Changes in version 1.0.5}{
+  \itemize{
+    \item{Improved the documentation.}
+  }
+}
+
 \section{Changes in version 1.0.4}{
   \itemize{
     \item{Modified license from GPL (>=2) to GPL-3.}
