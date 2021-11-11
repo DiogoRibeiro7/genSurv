@@ -1,3 +1,3 @@
 .onUnload <- function(libpath) {
-	library.dynam.unload("genSurv", libpath)
-}
+	library.dynam.unload("genSurv", libpath);
+} # .onUnload
