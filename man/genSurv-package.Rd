@@ -12,7 +12,7 @@ The \pkg{genSurv} software permits to generate data with one binary time-depende
 		Package: \tab genSurv\cr
 		Type: \tab Package\cr
 		Version: \tab 1.0.5\cr
-		Date: \tab 2021-10-20\cr
+		Date: \tab 2021-11-11\cr
 		License: \tab GPL-3\cr
 		LazyLoad: \tab yes\cr
 	}
