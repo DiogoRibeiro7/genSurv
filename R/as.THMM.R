@@ -1,146 +1,120 @@
 is.THMM <- function(x) {
-	return( is.data.frame(x) & inherits(x, "THMM") );
-} # is.THMM
+    is.data.frame(x) && inherits(x, "THMM")
+}
+
 
 as.THMM <- function(x) {
-	UseMethod("as.THMM");
-} # as.THMM
+    UseMethod("as.THMM")
+}
+
 
 as.THMM.default <- function(x) {
-	stop(gettextf( "cannot coerce class '%s' into class 'THMM'", deparse( class(x) ) ), domain = NA);
-} # as.THMM.default
+    stop("cannot coerce class '", deparse(substitute(x)), "' into class 'THMM'", domain = NA)
+}
+
 
 as.THMM.THMM <- function(x) {
-	if ( !is.THMM(x) ) stop("'x' must be of class 'THMM'");
-	return(x);
-} # as.THMM.THMM
+    if (!is.THMM(x)) {
+        stop("'x' must be of class 'THMM'")
+    }
+    x
+}
+
 
 as.THMM.CMM <- function(x) {
-	if ( !is.CMM(x) ) stop("'x' must be of class 'CMM'");
-	data <- cbind(x$id, x$start, x$stop, x$event, x$covariate, x$trans);
-	data <- data.frame(data, row.names=NULL);
-	names(data) <- c("id", "start", "stop", "event", "covariate", "trans");
-	data2 <- matrix(ncol=4, nrow=1);
-	i <- 1;
-	while ( i <= (nrow(data)-1) ) {
-		if (data[i,1] == data[i+1,1] & data[i,4] == 0 & data[i+1,4] == 0) {
-			aux1 <- c(data[i,1], 0, 1, data[i,5]);
-			aux2 <- c(data[i,1], data[i,3], 1, data[i,5]);
-			data2 <- rbind(data2, aux1, aux2);
-			i <- i+2;
-		}
-		if (i <= (nrow(data)-1) & data[i,6] == 1 & data[i,4] == 1) {
-			aux1 <- c(data[i,1], 0, 1, data[i,5]);
-			aux2 <- c(data[i,1], data[i,3], 3, data[i,5]);
-			data2 <- rbind(data2, aux1, aux2);
-			i <- i+2;
-		}
-		if (i <= (nrow(data)-1) & data[i,1] == data[i+1,1] & data[i,4] == 0 & data[i+1,4] == 1) {
-			if (data[i+2,4] == 0) {
-				aux1 <- c(data[i,1], 0, 1, data[i,5]);
-				aux2 <- c(data[i,1], data[i,3], 2, data[i,5]);
-				aux3 <- c(data[i,1], data[i+2,3], 2, data[i,5]);
-				data2 <- rbind(data2, aux1, aux2, aux3);
-			}
-			if (data[i+2,4] == 1) {
-				aux1 <- c(data[i,1], 0, 1, data[i,5]);
-				aux2 <- c(data[i,1], data[i,3], 2, data[i,5]);
-				aux3 <- c(data[i,1], data[i+2,3], 3, data[i,5]);
-				data2 <- rbind(data2, aux1, aux2, aux3);
-			}
-			i <- i+3;
-		}
-	}
-	data2 <- data.frame(data2, row.names=NULL);
-	names(data2) <- c("PTNUM", "time", "state", "covariate");
-	data2 <- data2[-1,];
-	row.names(data2) <- as.integer( 1:nrow(data2) );
-	class(data2) <- c(class(data2), "THMM");
-	return(data2);
-} # as.THMM.CMM
+    if (!is.CMM(x)) stop("'x' must be of class 'CMM'")
+
+    # Simplify the data frame creation with direct assignment
+    data <- x[, c("id", "start", "stop", "event", "covariate", "trans")]
+    names(data) <- c("id", "start", "stop", "event", "covariate", "trans")
+
+    # Initialize an empty list for storing transformed rows
+    transformedRows <- list()
+
+    i <- 1
+    while (i <= nrow(data) - 1) {
+        currentState <- data[i, "event"]
+        nextState <- data[i + 1, "event"]
+        patientID <- data[i, "id"]
+        covariate <- data[i, "covariate"]
+
+        if (currentState == 0 && nextState == 0) {
+            transformedRows[[length(transformedRows) + 1]] <- c(patientID, 0, 1, covariate)
+            transformedRows[[length(transformedRows) + 1]] <- c(patientID, data[i, "stop"], 1, covariate)
+            i <- i + 2
+        } else if (currentState == 1 && data[i, "trans"] == 1) {
+            transformedRows[[length(transformedRows) + 1]] <- c(patientID, 0, 1, covariate)
+            transformedRows[[length(transformedRows) + 1]] <- c(patientID, data[i, "stop"], 3, covariate)
+            i <- i + 2
+        } else if (currentState == 0 && nextState == 1) {
+            nextStateDuration <- data[min(i + 2, nrow(data)), "stop"]
+            nextStateEvent <- data[min(i + 2, nrow(data)), "event"]
+
+            transformedRows[[length(transformedRows) + 1]] <- c(patientID, 0, 1, covariate)
+            transformedRows[[length(transformedRows) + 1]] <- c(patientID, data[i, "stop"], 2, covariate)
+            transformedRows[[length(transformedRows) + 1]] <- c(patientID, nextStateDuration, nextStateEvent == 0 ? 2:3, covariate)
+
+            i <- i + 3 # Assume the next state is always present
+        }
+    }
+
+    # Convert the list of rows into a data frame
+    data2 <- do.call(rbind, transformedRows)
+    colnames(data2) <- c("PTNUM", "time", "state", "covariate")
+
+    data2 <- data.frame(data2, stringsAsFactors = FALSE, row.names = NULL)
+    row.names(data2) <- as.integer(1:nrow(data2))
+    class(data2) <- c("data.frame", "THMM")
+
+    return(data2)
+}
+
 
 as.THMM.TDCM <- function(x) {
-	if ( !is.TDCM(x) ) stop("'x' must be of class 'TDCM'");
-	data <- cbind(x$start, x$stop, x$event, x$covariate, x$tdcov);
-	data <- data.frame(data, row.names=NULL);
-	names(data) <- c("start", "stop", "event", "covariate", "tdcov");
-	data2 <- data.frame();
-	j <- 1;
-	i <- 1;
-	doente <- 1;
-	ultimo <- 0;
-	while ( i <= nrow(data) ) {
-		if ( i == nrow(data) ) ultimo <- 1;
-		if (ultimo == 0 & data[i,2] == data[i+1,1] & data[i+1,3] == 0) {
-			data2[j,1] <- doente;
-			data2[j,2] <- 0;
-			data2[j,3] <- 1;
-			data2[j,4] <- data[i,4];
-			j <- j+1;
-			data2[j,1] <- doente;
-			data2[j,2] <- data[i,2];
-			data2[j,3] <- 2;
-			data2[j,4] <- data[i,4];
-			j <- j+1;
-			data2[j,1] <- doente;
-			data2[j,2] <- data[i+1,2];
-			data2[j,3] <- 2;
-			data2[j,4] <- data[i,4];
-			i <- i+2;
-			j <- j+1;
-			doente <- doente+1;
-		} else {
-			if (ultimo == 0 & data[i,2] == data[i+1,1] & data[i+1,3] == 1) {
-				data2[j,1] <- doente;
-				data2[j,2] <- 0;
-				data2[j,3] <- 1;
-				data2[j,4] <- data[i,4];
-				j <- j+1;
-				data2[j,1] <- doente;
-				data2[j,2] <- data[i,2];
-				data2[j,3] <- 2;
-				data2[j,4] <- data[i,4];
-				j <- j+1;
-				data2[j,1] <- doente;
-				data2[j,2] <- data[i+1,2];
-				data2[j,3] <- 3;
-				data2[j,4] <- data[i,4];
-				i <- i+2;
-				j <- j+1;
-				doente <- doente+1;
-			} else {
-				if (data[i,3] == 1) {
-					data2[j,1] <- doente;
-					data2[j,2] <- 0;
-					data2[j,3] <- 1;
-					data2[j,4] <- data[i,4];
-					j <- j+1;
-					data2[j,1] <- doente;
-					data2[j,2] <- data[i,2];
-					data2[j,3] <- 3;
-					data2[j,4] <- data[i,4];
-					i <- i+1;
-					j <- j+1;
-					doente <- doente+1;
-				} else {
-					data2[j,1] <- doente;
-					data2[j,2] <- 0;
-					data2[j,3] <- 1;
-					data2[j,4] <- data[i,4];
-					j <- j+1;
-					data2[j,1] <- doente;
-					data2[j,2] <- data[i,2];
-					data2[j,3] <- 1;
-					data2[j,4] <- data[i,4];
-					i <- i+1;
-					j <- j+1;
-					doente <- doente+1;
-				}
-			}
-		}
-	}
-	names(data2) <- c("PTNUM", "time", "state", "covariate");
-	row.names(data2) <- as.integer( 1:nrow(data2) );
-	class(data2) <- c(class(data2), "THMM");
-	return(data2);
-} # as.THMM.TDCM
+    if (!is.TDCM(x)) stop("'x' must be of class 'TDCM'")
+
+    # Initial setup
+    data <- x[c("start", "stop", "event", "covariate", "tdcov")]
+    transformedData <- list()
+    patientIndex <- 1
+
+    # Loop through data to transform
+    for (i in 1:nrow(data)) {
+        currentState <- data$event[i]
+        nextRowExists <- i < nrow(data)
+        transitionOccursNext <- nextRowExists && (data$start[i + 1] == data$stop[i])
+        eventIsCensoredNext <- transitionOccursNext && (data$event[i + 1] == 0)
+
+        # Common row to add for each patient
+        commonRow <- list(PTNUM = patientIndex, time = 0, state = 1, covariate = data$covariate[i])
+
+        if (eventIsCensoredNext) {
+            # Handling continuous censored transitions
+            transformedData[[length(transformedData) + 1]] <- commonRow
+            transformedData[[length(transformedData) + 1]] <- c(commonRow$PTNUM, data$stop[i], 2, commonRow$covariate)
+            i <- i + 1 # Skip the next row as it has been handled
+        } else {
+            nextState <- ifelse(currentState == 1, 3, 1)
+            if (nextRowExists) nextState <- ifelse(data$event[i + 1] == 1, 3, 2)
+
+            transformedData[[length(transformedData) + 1]] <- commonRow
+            if (nextState != 1 || !eventIsCensoredNext) {
+                stopTime <- ifelse(nextRowExists, data$stop[i + 1], data$stop[i])
+                transformedData[[length(transformedData) + 1]] <- c(commonRow$PTNUM, data$stop[i], nextState, commonRow$covariate)
+            }
+
+            if (nextState == 3 && nextRowExists) i <- i + 1 # Additional skip for directly observed event
+        }
+
+        patientIndex <- patientIndex + 1
+        if (!nextRowExists) break # Exit loop if at the end
+    }
+
+    # Finalize the data frame
+    data2 <- do.call(rbind, transformedData)
+    names(data2) <- c("PTNUM", "time", "state", "covariate")
+    data2 <- data.frame(data2, row.names = NULL, stringsAsFactors = FALSE)
+    class(data2) <- c("data.frame", "THMM")
+
+    return(data2)
+}
