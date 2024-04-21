@@ -13,14 +13,29 @@
 #' @return Invisibly returns NULL but will stop execution with an error message if inputs are invalid.
 #' @export
 validateInputs <- function(n, model.cens, cens.par, beta, covar, rate) { # nolint
-    if (n <= 0) stop("Argument 'n' must be greater than 0", call. = FALSE)
+    if (!is.numeric(n) || length(n) != 1 || n <= 0) {
+        stop("Argument 'n' must be a positive integer.", call. = FALSE)
+    }
+
     if (!(model.cens %in% c("uniform", "exponential"))) {
         stop("Argument 'model.cens' must be one of 'uniform' or 'exponential'", call. = FALSE)
     } # nolint
-    if (cens.par <= 0) stop("Argument 'cens.par' must be greater than 0", call. = FALSE) # nolint
-    if (length(beta) != 3) stop("Argument 'beta' length must be a vector with length 3", call. = FALSE) # nolint
-    if (covar <= 0) stop("Argument 'covar' must be greater than 0", call. = FALSE)
-    if (length(rate) != 3) stop("Argument 'rate' must be a vector with length 3", call. = FALSE) # nolint
+
+    if (!is.numeric(cens.par) || length(cens.par) != 1 || cens.par <= 0) {
+        stop("Argument 'cens.par' must be a positive number.", call. = FALSE)
+    } # nolint
+
+    if (!is.numeric(beta) || length(beta) != 3) {
+        stop("Argument 'beta' length must be a vector with length 3", call. = FALSE)
+    } # nolint
+
+    if (!is.numeric(covar) || length(covar) != 1 || covar <= 0) {
+        stop("Argument 'covar' must be greater than 0", call. = FALSE)
+    }
+
+    if (!is.numeric(rate) || length(rate) != 3) {
+        stop("Argument 'rate' must be a vector with length 3, each greater than 0", call. = FALSE)
+    } # nolint
 }
 
 #' Generate censored time based on specified model
@@ -146,4 +161,4 @@ genTHMM <- function(n, model.cens, cens.par, beta, covar, rate) {
     }
 
     return(assembleData(records))
-} 
+}

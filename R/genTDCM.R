@@ -1,3 +1,24 @@
+#' Validate Input Parameters for TDCM Data Generation
+#'
+#' Ensures that the parameters provided for generating TDCM data are valid. It checks
+#' the type, range, and length of each parameter according to the specifications for
+#' the TDCM data generation process.
+#'
+#' @param n Integer; the number of observations to generate.
+#' @param dist Character; specifies the distribution type, either "weibull" or "exponential".
+#' @param corr Numeric; the correlation coefficient, constraints depend on `dist`.
+#' @param dist.par Numeric vector; distribution parameters, their length and constraints depend on `dist`.
+#' @param model.cens Character; the censoring model used, either "uniform" or "exponential".
+#' @param cens.par Numeric; parameter for the censoring model, must be positive.
+#' @param beta Numeric vector; of length 2, parameters influencing the model.
+#' @param lambda Numeric; a positive parameter influencing the rate or intensity in the model.
+#'
+#' @return Does not return a value but stops function execution with an informative error
+#' if any input is invalid.
+#' @export
+#' @examples
+#' validateGenTDCMInputs(n = 100, dist = "weibull", corr = 0.5, dist.par = c(1, 2, 3, 4),
+#' model.cens = "uniform", cens.par = 0.5, beta = c(0.1, 0.2), lambda = 1)
 validateGenTDCMInputs <- function(n, dist, corr, dist.par, model.cens, cens.par, beta, lambda) { # nolint
   if (n <= 0) stop("Argument 'n' must be greater than 0", call. = FALSE)
   if (!(dist %in% c("weibull", "exponential"))) 
