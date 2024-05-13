@@ -1,23 +1,82 @@
+#' Check if an object is of class TDCM
+#'
+#' This function checks if an object is a data frame and inherits the class "TDCM".
+#'
+#' @param x The object to be checked.
+#' @return A logical value indicating whether the object is of class TDCM.
+#' @examples
+#' is.TDCM(data.frame()) # FALSE
+#' is.TDCM(TDCM()) # TRUE
+#' @export
 is.TDCM <- function(x) {
     is.data.frame(x) && inherits(x, "TDCM")
 }
 
 
+#' Convert an object to TDCM class
+#'
+#' This function is used to convert an object to the TDCM (Time-Dependent Covariate Model) class.
+#' It dispatches to the appropriate method based on the class of the input object.
+#'
+#' @param x The object to be converted.
+#'
+#' @return An object of class TDCM.
+#'
+#' @export
 as.TDCM <- function(x) {
     UseMethod("as.TDCM")
 }
 
 
+#' Coerce an object into class 'TDCM'
+#'
+#' This function attempts to coerce an object into the class 'TDCM'. If the coercion is not possible, an error is thrown.
+#'
+#' @param x The object to be coerced.
+#' @return The coerced object.
+#' @export
 as.TDCM.default <- function(x) {
     stop("cannot coerce class '", deparse(substitute(x)), "' into class 'TDCM'", domain = NA)
 }
 
 
+#' Convert to TDCM object
+#'
+#' This function converts an object to the TDCM class.
+#'
+#' @param x The object to be converted.
+#' @return The converted object of class 'TDCM'.
+#' @export
+#'
+#' @examples
+#' as.TDCM.TDCM(1)
+#'
+#' @importFrom methods is
+#' @importFrom methods stop
+#' @importFrom methods is.TDCM
 as.TDCM.TDCM <- function(x) {
     if (!is.TDCM(x)) stop("'x' must be of class 'TDCM'")
     x
 }
 
+#' Convert CMM object to TDCM object
+#'
+#' This function converts a CMM (Continuous-time Markov Model) object to a TDCM (Time-Dependent Covariate Model) object.
+#'
+#' @param x A CMM object.
+#'
+#' @return A TDCM object.
+#'
+#' @details The function takes a CMM object as input and returns a TDCM object. The TDCM object is created by transforming the rows of the input CMM object based on certain conditions. The transformed rows are then combined into a data frame and assigned the class "TDCM".
+#'
+#' @examples
+#' # Create a CMM object
+#' cmm <- create.CMM(...)
+#'
+#' # Convert CMM object to TDCM object
+#' tdcmm <- as.TDCM(cmm)
+#'
+#' @export
 as.TDCM.CMM <- function(x) {
     if (!is.CMM(x)) stop("'x' must be of class 'CMM'")
 
@@ -60,6 +119,26 @@ as.TDCM.CMM <- function(x) {
 }
 
 
+#' Convert a THMM object to a TDCM object
+#'
+#' This function takes a THMM (Time-Homogeneous Markov Model) object and converts it to a TDCM (Time-Dependent Covariate Model) object.
+#'
+#' @param x A THMM object.
+#'
+#' @return A TDCM object.
+#'
+#' @details The function transforms the data in the THMM object to match the format required for a TDCM object. It extracts the necessary columns from the THMM object, adjusts the rows based on state transitions, and converts the resulting list to a data frame with appropriate column names. The resulting data frame is then assigned the class "TDCM" and returned.
+#'
+#' @examples
+#' # Create a THMM object
+#' thmm <- create.THMM(...)
+#'
+#' # Convert the THMM object to a TDCM object
+#' tdcmm <- as.TDCM.THMM(thmm)
+#'
+#' @seealso \code{\link{create.THMM}}
+#'
+#' @export
 as.TDCM.THMM <- function(x) {
     if (!is.THMM(x)) stop("'x' must be of class 'THMM'")
 
