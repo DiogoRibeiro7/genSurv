@@ -1,8 +1,25 @@
+#' Check if an object is of class THMM
+#'
+#' This function checks if an object is of class THMM by verifying if it is a data frame and if it inherits the "THMM" class.
+#'
+#' @param x The object to be checked
+#' @return TRUE if the object is of class THMM, FALSE otherwise
+#' @examples
+#' is.THMM(data.frame()) # FALSE
+#' is.THMM(THMM()) # TRUE
 is.THMM <- function(x) {
     is.data.frame(x) && inherits(x, "THMM")
 }
 
 
+#' Convert an object to THMM class
+#'
+#' This function is a generic method for converting an object to the THMM class.
+#' It dispatches the appropriate method based on the class of the object.
+#'
+#' @param x The object to be converted.
+#' @return An object of class THMM.
+#' @export
 as.THMM <- function(x) {
     UseMethod("as.THMM")
 }
