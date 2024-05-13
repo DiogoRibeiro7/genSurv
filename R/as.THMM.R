@@ -25,11 +25,27 @@ as.THMM <- function(x) {
 }
 
 
+#' Coerce an object into class 'THMM'
+#'
+#' This function is used to coerce an object into class 'THMM'. If the coercion is not possible, an error is thrown.
+#'
+#' @param x The object to be coerced.
+#' @return An object of class 'THMM'.
+#' @export
 as.THMM.default <- function(x) {
     stop("cannot coerce class '", deparse(substitute(x)), "' into class 'THMM'", domain = NA)
 }
 
 
+#' Convert object to THMM class
+#'
+#' This function converts an object to the THMM class.
+#'
+#' @param x The object to be converted.
+#' @return The object of class THMM.
+#' @export
+#' @examples
+#' as.THMM.THMM(object)
 as.THMM.THMM <- function(x) {
     if (!is.THMM(x)) {
         stop("'x' must be of class 'THMM'")
@@ -38,6 +54,15 @@ as.THMM.THMM <- function(x) {
 }
 
 
+#' Convert a CMM object to a THMM object
+#'
+#' This function converts a CMM (Continuous-time Markov Model) object to a THMM (Two-state Hidden Markov Model) object.
+#' The CMM object should have the following columns: "id", "start", "stop", "event", "covariate", and "trans".
+#' The THMM object will have the following columns: "PTNUM", "time", "state", and "covariate".
+#'
+#' @param x A CMM object to be converted to a THMM object.
+#' @return A THMM object.
+#' @export
 as.THMM.CMM <- function(x) {
     if (!is.CMM(x)) stop("'x' must be of class 'CMM'")
 
@@ -87,6 +112,13 @@ as.THMM.CMM <- function(x) {
 }
 
 
+#' Convert TDCM object to THMM object
+#'
+#' This function converts a TDCM (Time-Dependent Covariate Model) object to a THMM (Time-Homogeneous Markov Model) object.
+#'
+#' @param x A TDCM object.
+#' @return A THMM object.
+#' @export
 as.THMM.TDCM <- function(x) {
     if (!is.TDCM(x)) stop("'x' must be of class 'TDCM'")
 
