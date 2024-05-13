@@ -1,24 +1,80 @@
+#' Check if an object is of class CMM
+#'
+#' This function checks if an object is a data frame and inherits the class "CMM".
+#'
+#' @param x The object to be checked.
+#' @return TRUE if the object is of class CMM, FALSE otherwise.
+#' @examples
+#' is.CMM(data.frame()) # FALSE
+#' is.CMM(CMM()) # TRUE
+#' @export
 is.CMM <- function(x) {
     is.data.frame(x) && inherits(x, "CMM")
 }
 
 
+#' Convert an object to CMM class
+#'
+#' This function is a generic method for converting an object to the CMM class.
+#' It uses the S3 object-oriented programming system in R.
+#'
+#' @param x The object to be converted.
+#'
+#' @return An object of class CMM.
+#'
+#' @export
 as.CMM <- function(x) {
     UseMethod("as.CMM")
 }
 
 
+#' Coerce an object into class 'CMM'
+#'
+#' This function attempts to coerce an object into class 'CMM'. If the coercion is not possible, an error is thrown.
+#'
+#' @param x The object to be coerced.
+#'
+#' @return The coerced object.
+#'
+#' @examples
+#' as.CMM.default(5)
+#' # Error: Cannot coerce class '5' into class 'CMM'
+#'
+#' @export
 as.CMM.default <- function(x) {
     stop("Cannot coerce class '", deparse(substitute(x)), "' into class 'CMM'", domain = NA)
 }
 
 
+#' Convert an object to class CMM
+#'
+#' This function converts an object to class CMM.
+#'
+#' @param x An object to be converted to class CMM.
+#' @return The converted object of class CMM.
+#' @export
+#'
+#' @examples
+#' x <- as.CMM.CMM(object)
+#' class(x)
+#'
+#' @seealso
+#' \code{\link{is.CMM}}
+#'
+#' @keywords internal
 as.CMM.CMM <- function(x) {
     if (!is.CMM(x)) stop("'x' must be of class 'CMM'")
     x
 }
 
 
+#' Convert TDCM object to CMM object
+#'
+#' This function converts a TDCM (Time-Dependent Covariate Model) object to a CMM (Continuous-Time Markov Model) object.
+#'
+#' @param x A TDCM object.
+#' @return A CMM object.
+#' @export
 as.CMM.TDCM <- function(x) {
     if (!is.TDCM(x)) stop("'x' must be of class 'TDCM'")
 
@@ -66,6 +122,29 @@ as.CMM.TDCM <- function(x) {
 }
 
 
+#' Convert a THMM object to a CMM object
+#'
+#' This function converts a THMM (Time-Homogeneous Markov Model) object to a CMM (Continuous-Time Markov Model) object.
+#' The THMM object must have the following columns: "PTNUM" (patient ID), "time" (time of observation), "state" (current state), and "covariate" (covariate value).
+#' The function creates a new data frame with the following columns: "id" (patient ID), "start" (start time), "stop" (stop time), "event" (event indicator), "covariate" (covariate value), and "trans" (transition indicator).
+#' The "event" column indicates whether an event occurred during the time interval, and the "trans" column indicates the type of transition.
+#' If a patient has multiple state sequences, the function handles them separately.
+#'
+#' @param x A THMM object to be converted to a CMM object.
+#' @return A CMM object.
+#' @export
+#' @examples
+#' # Create a THMM object
+#' thmm <- data.frame(PTNUM = c(1, 1, 1, 2, 2, 2),
+#'                    time = c(0, 1, 2, 0, 1, 2),
+#'                    state = c(1, 2, 3, 1, 2, 3),
+#'                    covariate = c(0.5, 0.7, 0.9, 1.2, 1.5, 1.8))
+#' class(thmm) <- "THMM"
+#'
+#' # Convert the THMM object to a CMM object
+#' cmm <- as.CMM.THMM(thmm)
+#' class(cmm)
+#' # Output: "CMM"
 as.CMM.THMM <- function(x) {
     if (!is.THMM(x)) stop("'x' must be of class 'THMM'")
     
